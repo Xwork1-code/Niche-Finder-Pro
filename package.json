@@ -1,12 +1,16 @@
 {
-"name": "niche-finder-pro",
-"version": "1.0.0",
-"description": "Niche Finder Pro Backend",
-"main": "server.js",
-"scripts": {
-"start": "node server.js"
-},
-"dependencies": {
-"express": "^4.21.2"
+  "name": "niche-finder-pro",
+  "version": "1.0.0",
+  "description": "Niche Finder Pro Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
   }
 }
