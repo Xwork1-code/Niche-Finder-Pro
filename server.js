@@ -6,8 +6,13 @@ const { Pool } = require("pg");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://niche-finder-pro-frontend.vercel.app"
+}));
+
 app.use(express.json());
+
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -29,7 +34,7 @@ app.post("/api/auth/register", async (req, res) => {
 
     if (existing.rows.length > 0) {
       return res.status(400).json({
-        message: "User already exists",
+        message: "User already exists"
       });
     }
 
@@ -41,9 +46,10 @@ app.post("/api/auth/register", async (req, res) => {
     );
 
     res.status(201).json(result.rows[0]);
+
   } catch (error) {
     res.status(500).json({
-      error: error.message,
+      error: error.message
     });
   }
 });
@@ -59,7 +65,7 @@ app.post("/api/auth/login", async (req, res) => {
 
     if (result.rows.length === 0) {
       return res.status(401).json({
-        message: "Invalid credentials",
+        message: "Invalid credentials"
       });
     }
 
@@ -72,27 +78,28 @@ app.post("/api/auth/login", async (req, res) => {
 
     if (!valid) {
       return res.status(401).json({
-        message: "Invalid credentials",
+        message: "Invalid credentials"
       });
     }
 
     const token = jwt.sign(
       {
         id: user.id,
-        email: user.email,
+        email: user.email
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "7d",
+        expiresIn: "7d"
       }
     );
 
     res.json({
-      token,
+      token
     });
+
   } catch (error) {
     res.status(500).json({
-      error: error.message,
+      error: error.message
     });
   }
 });
